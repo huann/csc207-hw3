@@ -4,63 +4,160 @@ package edu.grinnell.csc207.huann.utils;
 
 public class StringUtils {
 
-	public static String[] splitAt(String a, char b) {
-		{
-			{
-			}
-		}
-		return null;
+	/*
+	 * Given a string and a character, uses the character as a 
+	 * separator to split the string into substrings. Returns an 
+	 * array of these substrings.
+	 */
+	public static String[] splitAt(String text, char separator) {
+		int outLen = 1;
+		for (int i = 0; i < text.length(); i++) {
+			if (text.charAt(i) == separator) {
+				outLen++;
+			} //if the separator appears
+		} //for every character in the input string
+		//create a new string of length outLen to hold the output
+		String[] output = new String[outLen];
+		int index = 0;
+		//use a StringBuffer to temporarily store substrings
+		StringBuffer subText = new StringBuffer();
+		for (int i = 0; i < text.length(); i++) {
+			if (text.charAt(i) == separator) {
+				output[index] = subText.toString(); //having this
+				//here takes care of leading empty's
+				subText.setLength(0); //clear out subText
+				index++;
+			} //if the separator appears
+			else {
+				subText.append(text.charAt(i));
+			} //else
+			output[index] = subText.toString(); //having this outside
+			//the else statement takes care of trailing empty's
+		} //for every character in the input string
+		return output;
 	} //splitAt(string [], char)
 
 
-	public static String[] splitCSV(String a) {
-		{
-			{
+	/*
+	 * Given a string, uses a comma as a separator to split the 
+	 * string into substrings. 
+	 * Special cases: 
+	 * 		(1) If the separator is in text surrounded by double 
+	 * 		quotation marks, takes it as part of a substring.
+	 * 		(2) If two double quotation marks appear in sequence, 
+	 * 		treats them as single character. 
+	 * Returns an array of these substrings.
+	 */
+	public static String[] splitCSV(String text) {
+		char separator = ',';
+		
+		int count = 0;
+		for (int i = 0; i < text.length(); i++) {
+			if (text.charAt(i) == '"') {
+				count++;
 			}
 		}
-		return null;
+		if (count < 2) {
+			return splitAt(text, separator);
+		}
+		else {
+			
+		}	
 	} //splitCSV(string [])
 
 
 	/*
-	 * 
+	 * Given a string of leet text, returns the corresponding normal
+	 * text.
 	 */
 	public static String deLeet(String leet) {
-		String[][] leetTrans = { { "@", "a" }, { "|3", "b" }, 
-				{ "3", "e" }, { "1", "l" }, { "|\\|", "n" }, 
-				{ "0", "o" }, { "+", "t" } };
+		String[][] leetTrans = new String[][] { { "@", "a" }, 
+				{ "|3", "b" }, { "3", "e" }, { "1", "l" }, 
+				{ "|\\|", "n" }, { "0", "o" }, { "+", "t" } };
 		for (int i = 0; i < leetTrans.length; i++) {
 			leet = leet.replace(leetTrans[i][0], leetTrans[i][1]);
-		} //for every leet character, replace with the corresponding normal character
+		} //for every leet character
 		return leet;
 	}//deLeet(string [])
 	
 	
 	public static String nameGame(String name) {
-		
-		String verse = "name! /nname, name bo name Bonana fana fo name /nFee fo mo name, name!";
+		//char[] arrName = name.toCharArray();
+		String cdr = "";
+		int position = 0;
+		for (int i = 0; i < name.length(); i++) {
+			if (name.charAt(i) == 'a' || name.charAt(i) == 'e' || 
+					name.charAt(i) == 'i' || name.charAt(i) == 'o' || 
+					name.charAt(i) == 'u') {
 
-		/*
-		name + "!"
-		name + ", " + name + "bo " + ... "fanna fo " ...
-		"Fee fy mo " ... ", " name + "!"
-		 */
-		
+			} //if the name starts with a vowel
+			else {
+				position++;
+				System.out.println("Position 3: " + position);
+			}
+		}
+		cdr = name.substring(position);
+		System.out.println("cdr: " + cdr);
+		String verse = cdr;//name + "!/n" + name + ", " + name + " bo B" + cdr; //+ "Bonana fanna fo F" + cdr; // /nFee fo mo name, name!";
 		return verse;
 	} //nameGame(string [])
 	
+	
+	
+	/*
+	public static String nameGame(String name) {
+		//PrintWriter pen = new PrintWriter(System.out, true);
+		char[] arrName = name.toCharArray();
+		String cdr = "";
+		int position = 0;
+		for (int i = 0; i < arrName.length; i++) {
+			if (arrName[i] != 'a' || arrName[i] != 'e' || 
+					arrName[i] != 'i' || arrName[i] != 'o' || 
+					arrName[i] != 'u') {
+				System.out.println("Position 1: " + position);
+				position += 1;
+				System.out.println("Position 2: " + position);
+				
+			} //if the name starts with a vowel
+			else {
+				position += 0;
+			}
+		}
+		cdr = name.substring(position);
+		System.out.println("cdr: " + cdr);
+		String verse = cdr;//name + "!/n" + name + ", " + name + " bo B" + cdr; //+ "Bonana fanna fo F" + cdr; // /nFee fo mo name, name!";
+		/*
+		pen.println(name + "!");
+		pen.println(name + ", " + name + "bo B" + cdr + "Bonana fanna fo F" + cdr);
+		pen.println("Fee fy mo M" + cdr + ", " + name + "!");
+		 */
+	/*
+		return verse;
+	} //nameGame(string [])
+	*/
+	
 
 	public static int[] fewestCoins(int a) {
-		
-		{
+		int [] coins = new int[] {2, 7, 11, 54};
+		int[] fewest = new int[] {};
+		if (a == 0) {
+			return null;
 		}
-		return null;
+		if (a < 0) {
+			return null;
+		}
+		
+		int[] solution1 = fewestCoins(a - 54);
+		
+
+		return fewest;
 	} //fewestCoins(int)
 
 }
 
 /*
- * Citations: In writing the deLeet method, I looked up how to "replace" 
- * on Java API (Oracle) and looked at examples on StackOverflow for guidance.
- * 
+ * Citations: 
+ * For all the methods I looked up on Java API (Oracle) 
+ * ("replace", "substring", etc.), I looked at examples on 
+ * StackOverflow and tutorialspoint for further guidance.
  */

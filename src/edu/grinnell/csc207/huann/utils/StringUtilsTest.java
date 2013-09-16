@@ -44,15 +44,11 @@ public class StringUtilsTest {
 
 	@Test
 	public void nameGame() {
-		//assertEquals("Shirley!/nShirley, Shirley bo Birley", StringUtils.nameGame("Shirley"));
-		//assertEquals("irley", StringUtils.nameGame("Shirley"));
-		//assertEquals("Olivia", StringUtils.nameGame("Olivia"));
-		//assertEquals("incoln", StringUtils.nameGame("Lincoln"));
+		assertEquals("Shirley!/nShirley, Shirley bo Birley Bonana fanna fo Firley/nFee fy mo Mirley, Shirley!", 
+				StringUtils.nameGame("Shirley"));
+		assertEquals("Lincoln!/nLincoln, Lincoln bo Bincoln Bonana fanna fo Fincoln/nFee fy mo Mincoln, Lincoln!", 
+				StringUtils.nameGame("Lincoln"));
+		assertEquals("Ann!/nAnn, Ann bo BAnn Bonana fanna fo FAnn/nFee fy mo MAnn, Ann!", 
+				StringUtils.nameGame("Ann"));
 	}
-	
-	@Test
-	public void testFewestCoins() {
-		fail("Not yet implemented");
-	}
-
 }

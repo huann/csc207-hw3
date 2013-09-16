@@ -30,4 +30,20 @@ public class Calculator {
 		return ans;
 	} //eva10(string [])
 
+	
+	public static int[] fewestCoins(int a) {
+		int [] coins = new int[] {2, 7, 11, 54};
+		int[] fewest = new int[] {};
+		if (a == 0) {
+			return null;
+		}
+		if (a < 0) {
+			return null;
+		}
+		
+		int[] solution1 = fewestCoins(a - 54);
+		
+
+		return fewest;
+	} //fewestCoins(int)
 }

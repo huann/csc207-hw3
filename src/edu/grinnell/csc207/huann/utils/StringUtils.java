@@ -62,6 +62,8 @@ public class StringUtils {
 		}
 		else {
 			
+			
+			return null;
 		}	
 	} //splitCSV(string [])
 
@@ -71,88 +73,44 @@ public class StringUtils {
 	 * text.
 	 */
 	public static String deLeet(String leet) {
+		//create an array of arrays to store leet and corresponding chars
 		String[][] leetTrans = new String[][] { { "@", "a" }, 
 				{ "|3", "b" }, { "3", "e" }, { "1", "l" }, 
 				{ "|\\|", "n" }, { "0", "o" }, { "+", "t" } };
 		for (int i = 0; i < leetTrans.length; i++) {
 			leet = leet.replace(leetTrans[i][0], leetTrans[i][1]);
-		} //for every leet character
+		} //for every leet character, replace with corresponding normal
 		return leet;
 	}//deLeet(string [])
 	
 	
+	/*
+	 * Given a name, returns a verse from Shirley Ellis' "The Name 
+	 * Game"
+	 */
 	public static String nameGame(String name) {
-		//char[] arrName = name.toCharArray();
 		String cdr = "";
 		int position = 0;
 		for (int i = 0; i < name.length(); i++) {
-			if (name.charAt(i) == 'a' || name.charAt(i) == 'e' || 
-					name.charAt(i) == 'i' || name.charAt(i) == 'o' || 
-					name.charAt(i) == 'u') {
-
-			} //if the name starts with a vowel
+			if (name.toLowerCase().charAt(i) == 'a' || 
+					name.toLowerCase().charAt(i) == 'e' || 
+					name.toLowerCase().charAt(i) == 'i' || 
+					name.toLowerCase().charAt(i) == 'o' || 
+					name.toLowerCase().charAt(i) == 'u') {
+				break;
+			} //if the ith character in name is a vowel
 			else {
 				position++;
-				System.out.println("Position 3: " + position);
-			}
-		}
-		cdr = name.substring(position);
-		System.out.println("cdr: " + cdr);
-		String verse = cdr;//name + "!/n" + name + ", " + name + " bo B" + cdr; //+ "Bonana fanna fo F" + cdr; // /nFee fo mo name, name!";
+			} //else
+		} //for every character in name
+		cdr = name.substring(position); //cuts off beginning consonants
+		String verse = 
+				name + "!/n" + 
+				name + ", " + name + " bo B" + cdr + 
+				" Bonana fanna fo F" + cdr +
+				"/nFee fy mo M" + cdr + ", " + name + "!";
 		return verse;
 	} //nameGame(string [])
-	
-	
-	
-	/*
-	public static String nameGame(String name) {
-		//PrintWriter pen = new PrintWriter(System.out, true);
-		char[] arrName = name.toCharArray();
-		String cdr = "";
-		int position = 0;
-		for (int i = 0; i < arrName.length; i++) {
-			if (arrName[i] != 'a' || arrName[i] != 'e' || 
-					arrName[i] != 'i' || arrName[i] != 'o' || 
-					arrName[i] != 'u') {
-				System.out.println("Position 1: " + position);
-				position += 1;
-				System.out.println("Position 2: " + position);
-				
-			} //if the name starts with a vowel
-			else {
-				position += 0;
-			}
-		}
-		cdr = name.substring(position);
-		System.out.println("cdr: " + cdr);
-		String verse = cdr;//name + "!/n" + name + ", " + name + " bo B" + cdr; //+ "Bonana fanna fo F" + cdr; // /nFee fo mo name, name!";
-		/*
-		pen.println(name + "!");
-		pen.println(name + ", " + name + "bo B" + cdr + "Bonana fanna fo F" + cdr);
-		pen.println("Fee fy mo M" + cdr + ", " + name + "!");
-		 */
-	/*
-		return verse;
-	} //nameGame(string [])
-	*/
-	
-
-	public static int[] fewestCoins(int a) {
-		int [] coins = new int[] {2, 7, 11, 54};
-		int[] fewest = new int[] {};
-		if (a == 0) {
-			return null;
-		}
-		if (a < 0) {
-			return null;
-		}
-		
-		int[] solution1 = fewestCoins(a - 54);
-		
-
-		return fewest;
-	} //fewestCoins(int)
-
 }
 
 /*

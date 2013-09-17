@@ -47,24 +47,41 @@ public class StringUtils {
 	 * 		(2) If two double quotation marks appear in sequence, 
 	 * 		treats them as single character. 
 	 * Returns an array of these substrings.
+	 * Note: The character '~' must not appear in the input string.
+	 * 
+	 * This method does not fully work - must find way to get 
+	 * rid of quotations! Commented are tried and failed approaches.
 	 */
 	public static String[] splitCSV(String text) {
-		char separator = ',';
-		
-		int count = 0;
-		for (int i = 0; i < text.length(); i++) {
-			if (text.charAt(i) == '"') {
-				count++;
+		char[] arrText = text.toCharArray();
+		boolean inQuote = false;
+		for (int i = 0; i < arrText.length; i++) {
+			if (arrText[i] == '"' && arrText[i+1] =='"') {
+				//String temp = String.valueOf(arrText);
+				//StringBuffer tempBuff = new StringBuffer(temp);
+				//tempBuff.deleteCharAt(i);
+				//temp = tempBuff.toString();
+				
+				//arrText[i+1] = '`';
+				//something else
+			}
+			if (arrText[i] == ',' && !inQuote) {
+				arrText[i] = '~'; // some character that doesn't appear in the string
+			}
+			if (arrText[i] == '"') {
+				inQuote = !inQuote;
+				//String temp = String.valueOf(arrText);
+				//StringBuffer tempBuff = new StringBuffer(temp);
+				//tempBuff.deleteCharAt(i);
+				//temp = tempBuff.toString();
+				
+				//arrText[i] = '`';
+				//something else
 			}
 		}
-		if (count < 2) {
-			return splitAt(text, separator);
-		}
-		else {
-			
-			
-			return null;
-		}	
+		String temp = String.valueOf(arrText);
+		String[] output = StringUtils.splitAt(temp, '~');
+		return output;
 	} //splitCSV(string [])
 
 
@@ -79,11 +96,11 @@ public class StringUtils {
 				{ "|\\|", "n" }, { "0", "o" }, { "+", "t" } };
 		for (int i = 0; i < leetTrans.length; i++) {
 			leet = leet.replace(leetTrans[i][0], leetTrans[i][1]);
-		} //for every leet character, replace with corresponding normal
+		} //for every leet character
 		return leet;
 	}//deLeet(string [])
-	
-	
+
+
 	/*
 	 * Given a name, returns a verse from Shirley Ellis' "The Name 
 	 * Game"
@@ -106,9 +123,9 @@ public class StringUtils {
 		cdr = name.substring(position); //cuts off beginning consonants
 		String verse = 
 				name + "!/n" + 
-				name + ", " + name + " bo B" + cdr + 
-				" Bonana fanna fo F" + cdr +
-				"/nFee fy mo M" + cdr + ", " + name + "!";
+						name + ", " + name + " bo B" + cdr + 
+						" Bonana fanna fo F" + cdr +
+						"/nFee fy mo M" + cdr + ", " + name + "!";
 		return verse;
 	} //nameGame(string [])
 }
@@ -118,4 +135,9 @@ public class StringUtils {
  * For all the methods I looked up on Java API (Oracle) 
  * ("replace", "substring", etc.), I looked at examples on 
  * StackOverflow and tutorialspoint for further guidance.
+ * 
+ * For the parts of the splitCSV method I was able to make work,
+ * I found the boolean inQuote trick here: 
+ * http://stackoverflow.com/questions/14943748/how-can-i-split-this-string-on-comma-and-quotation-mark
+ * and adapted it to my method. 
  */
